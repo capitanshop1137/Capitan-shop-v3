@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ورود به پنل مدیریت | Capitan Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: linear-gradient(135deg, #0A0A15, #12122A);
+    color: #F8FAFC; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(0, 217, 255, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(176, 38, 255, 0.15) 0%, transparent 40%);
+  }
+  .login-box {
+    background: linear-gradient(135deg, #1A1A2E, #252540);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    border-radius: 20px; padding: 40px;
+    max-width: 400px; width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 217, 255, 0.2);
+  }
+  h1 {
+    background: linear-gradient(135deg, #00D9FF, #B026FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center; margin-bottom: 30px; font-size: 22px;
+    font-family: 'Bebas Neue', 'Vazirmatn', sans-serif;
+    letter-spacing: 1px;
+  }
+  label {
+    display: block; font-size: 13px;
+    color: #00D9FF; margin-bottom: 6px;
+    font-weight: 700;
+  }
+  input {
+    width: 100%; padding: 12px 14px;
+    background: rgba(10, 10, 21, 0.6);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    border-radius: 10px; color: #F8FAFC;
+    font-family: inherit; font-size: 14px;
+    margin-bottom: 16px;
+    transition: all 0.3s;
+  }
+  input:focus {
+    outline: none; border-color: #00D9FF;
+    box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.15), 0 0 20px rgba(0, 217, 255, 0.3);
+  }
+  button {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, #B026FF, #FF2E88);
+    color: #fff; border: none;
+    border-radius: 10px; font-family: inherit;
+    font-size: 15px; font-weight: 800;
+    cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 0 25px rgba(176, 38, 255, 0.4);
+  }
+  button:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(176, 38, 255, 0.7); }
+  .msg {
+    padding: 12px; border-radius: 10px;
+    margin-bottom: 16px; font-size: 13px;
+    text-align: center; display: none;
+  }
+  .msg.error {
+    background: rgba(255, 46, 136, 0.15);
+    color: #FF2E88; border: 1px solid rgba(255, 46, 136, 0.5);
+    display: block;
+  }
+</style>
+</head>
+<body>
+  <div class="login-box">
+    <h1>⚓ ورود به پنل کاپیتان</h1>
+    <div class="msg" id="msg"></div>
+    <form id="loginForm">
+      <label>👤 نام کاربری</label>
+      <input type="text" id="username" required autocomplete="username">
+      <label>🔑 رمز عبور</label>
+      <input type="password" id="password" required autocomplete="current-password">
+      <button type="submit">🚀 ورود به پنل</button>
+    </form>
+  </div>
+
+  <script>
+    const ADMIN_USER = 'capitan';
+    const ADMIN_PASS = 'Capitan2025!';
+
+    if (sessionStorage.getItem('capitan_admin') === 'true') {
+      window.location.href = 'dashboard.html';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value;
+      const msg = document.getElementById('msg');
+
+      if (u === ADMIN_USER && p === ADMIN_PASS) {
+        sessionStorage.setItem('capitan_admin', 'true');
+        window.location.href = 'dashboard.html';
+      } else {
+        msg.textContent = '❌ نام کاربری یا رمز عبور اشتباهه';
+        msg.className = 'msg error';
+      }
+    });
+  </script>
+</body>
+</html>
