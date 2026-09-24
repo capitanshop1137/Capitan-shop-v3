@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پنل مدیریت | Capitan Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neon-blue: #00D9FF;
+    --neon-purple: #B026FF;
+    --neon-pink: #FF2E88;
+    --neon-green: #00FF88;
+    --gold: #FFB800;
+    --fire-orange: #FF6B00;
+    --fire-red: #FF0044;
+    --dark: #0A0A15;
+    --text: #F8FAFC;
+    --muted: #94A3B8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(176, 38, 255, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(0, 217, 255, 0.15) 0%, transparent 40%);
+    z-index: -2;
+  }
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 217, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 217, 255, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+  }
+  header {
+    background: rgba(10, 10, 21, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header h1 {
+    font-family: 'Bebas Neue', 'Vazirmatn', sans-serif;
+    font-size: 22px;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  header h1 .dot {
+    width: 10px; height: 10px;
+    background: var(--neon-green);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--neon-green);
+  }
+  header button {
+    background: rgba(255, 46, 136, 0.1);
+    color: var(--neon-pink);
+    border: 1px solid rgba(255, 46, 136, 0.4);
+    padding: 9px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .container { max-width: 1000px; margin: 0 auto; padding: 24px 20px; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .stat {
+    background: linear-gradient(135deg, rgba(18, 18, 42, 0.8), rgba(28, 28, 58, 0.8));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 217, 255, 0.15);
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+  }
+  .stat .label { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 4px; }
+
+  .main-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    background: rgba(18, 18, 42, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 6px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(0, 217, 255, 0.15);
+  }
+  .main-tab {
+    padding: 12px 8px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    border-radius: 12px;
+    font-size: 13px;
+    transition: all 0.3s;
+  }
+  .main-tab.active {
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+    color: #fff;
+    box-shadow: 0 0 25px rgba(176, 38, 255, 0.5);
+  }
+  .main-tab[data-tab="items"].active {
+    background: linear-gradient(135deg, var(--gold), var(--fire-orange));
+    box-shadow: 0 0 25px rgba(255, 184, 0, 0.5);
+    color: #000;
+  }
+  .main-tab[data-tab="freefire"].active {
+    background: linear-gradient(135deg, var(--fire-orange), var(--fire-red));
+    box-shadow: 0 0 25px rgba(255, 107, 0, 0.5);
+  }
+
+  .section-tabs {
+    display: flex;
+    gap: 8px;
+    background: rgba(18, 18, 42, 0.6);
+    padding: 5px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(0, 217, 255, 0.1);
+  }
+  .section-tab {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    border-radius: 10px;
+    font-size: 13px;
+    transition: all 0.3s;
+  }
+  .section-tab.active {
+    background: rgba(0, 217, 255, 0.15);
+    color: var(--neon-blue);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+  }
+
+  .card {
+    background: linear-gradient(135deg, rgba(18, 18, 42, 0.9), rgba(28, 28, 58, 0.9));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 217, 255, 0.15);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  }
+  .card h2 {
+    font-family: 'Bebas Neue', 'Vazirmatn', sans-serif;
+    font-size: 22px;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+  }
+  .card h2.gold {
+    background: linear-gradient(135deg, var(--gold), var(--fire-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .card h2.fire {
+    background: linear-gradient(135deg, var(--fire-orange), var(--fire-red));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    color: var(--neon-blue);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .field input, .field textarea, .field select {
+    width: 100%;
+    padding: 12px 14px;
+    background: rgba(10, 10, 21, 0.6);
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    outline: none;
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.15);
+  }
+  .field textarea { min-height: 80px; resize: vertical; }
+  .field select option { background: #12122A; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .upload-box {
+    border: 2px dashed rgba(176, 38, 255, 0.4);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    background: rgba(176, 38, 255, 0.03);
+  }
+  .upload-box:hover { border-color: var(--neon-purple); background: rgba(176, 38, 255, 0.08); }
+  .upload-box .icon { font-size: 36px; display: block; margin-bottom: 6px; }
+  .upload-box input { display: none; }
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .preview-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid var(--neon-purple);
+    background: #12122A;
+  }
+  .preview-item img { width: 100%; height: 100%; object-fit: cover; }
+  .btn {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 14px;
+    font-family: inherit;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+    color: #fff;
+    width: 100%;
+    box-shadow: 0 0 25px rgba(176, 38, 255, 0.4);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(176, 38, 255, 0.7); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-gold { background: linear-gradient(135deg, var(--gold), var(--fire-orange)); color: #000; }
+  .btn-fire { background: linear-gradient(135deg, var(--fire-orange), var(--fire-red)); color: #fff; }
+  .msg {
+    padding: 14px 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    display: none;
+    text-align: center;
+  }
+  .msg.success {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--neon-green);
+    border: 1px solid rgba(0, 255, 136, 0.4);
+    display: block;
+  }
+  .msg.error {
+    background: rgba(255, 46, 136, 0.1);
+    color: var(--neon-pink);
+    border: 1px solid rgba(255, 46, 136, 0.4);
+    display: block;
+  }
+  .accounts-list { display: grid; gap: 12px; }
+  .account-row {
+    background: linear-gradient(135deg, rgba(18, 18, 42, 0.7), rgba(28, 28, 58, 0.7));
+    border: 1px solid rgba(0, 217, 255, 0.15);
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .account-row img, .account-row .no-img {
+    width: 56px; height: 56px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 217, 255, 0.3);
+  }
+  .account-row .no-img {
+    background: linear-gradient(135deg, rgba(176, 38, 255, 0.2), rgba(0, 217, 255, 0.2));
+    display: flex; align-items: center;
+    justify-content: center; font-size: 24px;
+  }
+  .account-row .info { flex: 1; min-width: 150px; }
+  .account-row h3 { font-size: 14px; margin-bottom: 4px; color: #fff; }
+  .account-row .meta { font-size: 11px; color: var(--muted); }
+  .account-row .meta .badge {
+    background: rgba(0, 217, 255, 0.1);
+    color: var(--neon-blue);
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-size: 10px;
+    margin-left: 4px;
+    display: inline-block;
+    border: 1px solid rgba(0, 217, 255, 0.2);
+  }
+  .account-actions { display: flex; gap: 5px; }
+  .account-actions button {
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 46, 136, 0.3);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(255, 46, 136, 0.1);
+    color: var(--neon-pink);
+  }
+  .account-actions .btn-edit {
+    background: rgba(0, 217, 255, 0.1);
+    color: var(--neon-blue);
+    border-color: rgba(0, 217, 255, 0.3);
+  }
+  .hidden { display: none !important; }
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
+    display: none; align-items: center;
+    justify-content: center; padding: 20px;
+    z-index: 1000; overflow-y: auto;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: linear-gradient(135deg, rgba(18,18,42,0.98), rgba(28,28,58,0.98));
+    border: 1px solid rgba(0,217,255,0.3);
+    border-radius: 20px; padding: 24px;
+    max-width: 600px; width: 100%;
+    max-height: 90vh; overflow-y: auto;
+    margin: auto;
+  }
+  .modal-header {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 20px;
+  }
+  .modal-header h2 {
+    font-family: 'Bebas Neue', 'Vazirmatn', sans-serif;
+    font-size: 22px;
+    background: linear-gradient(135deg, #00D9FF, #B026FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+  }
+  .close-btn {
+    background: rgba(255,46,136,0.1);
+    color: #FF2E88;
+    border: 1px solid rgba(255,46,136,0.3);
+    width: 32px; height: 32px;
+    border-radius: 8px; cursor: pointer;
+    font-size: 16px; font-weight: 700;
+  }
+
+  @media (max-width: 640px) {
+    .row-2, .row-3 { grid-template-columns: 1fr; }
+    .container { padding: 16px; }
+    .card { padding: 18px; }
+    header h1 { font-size: 16px; }
+    .account-row { flex-direction: column; align-items: flex-start; }
+    .account-actions { width: 100%; }
+    .main-tabs { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1><span class="dot"></span> ⚓ پنل مدیریت کاپیتان</h1>
+    <button onclick="logout()">🚪 خروج</button>
+  </header>
+
+  <div class="container">
+    <div class="stats">
+      <div class="stat"><div class="num" id="statClash">0</div><div class="label">🎮 اکانت‌های کلش</div></div>
+      <div class="stat"><div class="num" id="statItems">0</div><div class="label">🏆 آیتم‌های کلش</div></div>
+      <div class="stat"><div class="num" id="statFreefire">0</div><div class="label">🔫 فری فایر</div></div>
+      <div class="stat"><div class="num" id="statAll">0</div><div class="label">📊 مجموع</div></div>
+    </div>
+
+    <div class="main-tabs">
+      <button class="main-tab active" data-tab="clash">🎮 اکانت‌های کلش</button>
+      <button class="main-tab" data-tab="items">🏆 آیتم‌های کلش</button>
+      <button class="main-tab" data-tab="freefire">🔫 فری فایر</button>
+      <button class="main-tab" data-tab="all">📋 همه</button>
+    </div>
+
+    <!-- تب ۱: اکانت‌های کلش -->
+    <div id="tab-clash">
+      <div class="section-tabs">
+        <button class="section-tab active" data-section="add">➕ افزودن اکانت</button>
+        <button class="section-tab" data-section="list">📋 لیست اکانت‌ها</button>
+      </div>
+
+      <div id="clash-add-section">
+        <div class="card">
+          <h2>➕ افزودن اکانت کلش جدید</h2>
+          <div class="msg" id="clashAddMsg"></div>
+          <form id="clashForm">
+            <div class="row-2">
+              <div class="field"><label>🎮 عنوان *</label><input type="text" id="cTitle" required placeholder="اکانت کلش آف کلنز"></div>
+              <div class="field"><label>💫 شعار</label><input type="text" id="cTagline" placeholder="🔥 نقد و اقساط تضمینی 🔥"></div>
+            </div>
+            <div class="row-3">
+              <div class="field"><label>🏰 تاون هال *</label><input type="number" id="cTownhall" required min="1" placeholder="12"></div>
+              <div class="field"><label>🏗 لول بیلدر</label><input type="number" id="cBuilder" placeholder="10"></div>
+              <div class="field"><label>✏️ تغییر نام</label><input type="number" id="cNameChange" placeholder="500"></div>
+            </div>
+            <div class="row-2">
+              <div class="field"><label>💰 قیمت (تومان) *</label><input type="number" id="cPrice" required placeholder="5800"></div>
+              <div class="field"><label>🔢 کد اکانت *</label><input type="text" id="cCode" required placeholder="232"></div>
+            </div>
+            <div class="field"><label>📝 توضیحات</label><textarea id="cDescription" placeholder="آیدی ادمین: @AMIR_CAPITAN_18"></textarea></div>
+            <div class="field">
+              <label>🔘 وضعیت</label>
+              <select id="cStatus">
+                <option value="available">✅ موجود</option>
+                <option value="sold">❌ فروش رفته</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>📸 عکس‌ها (چندتایی)</label>
+              <div class="upload-box" onclick="document.getElementById('cImages').click()">
+                <span class="icon">🖼️</span>
+                <div>برای انتخاب عکس‌ها کلیک کن</div>
+                <input type="file" id="cImages" accept="image/*" multiple onchange="previewImages(this, 'cPreview')">
+              </div>
+              <div id="cPreview" class="preview-grid"></div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="cSubmitBtn">🚀 ثبت اکانت</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="clash-list-section" class="hidden">
+        <div class="card">
+          <h2>📋 لیست اکانت‌های کلش</h2>
+          <div id="clashList" class="accounts-list">در حال بارگذاری...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- تب ۲: آیتم‌های کلش -->
+    <div id="tab-items" class="hidden">
+      <div class="section-tabs">
+        <button class="section-tab active" data-section="add">➕ افزودن آیتم</button>
+        <button class="section-tab" data-section="list">📋 لیست آیتم‌ها</button>
+      </div>
+
+      <div id="items-add-section">
+        <div class="card">
+          <h2 class="gold">➕ افزودن آیتم کلش جدید</h2>
+          <div class="msg" id="itemAddMsg"></div>
+          <form id="itemForm">
+            <div class="row-2">
+              <div class="field"><label>🏆 عنوان *</label><input type="text" id="iTitle" required placeholder="بلیط طلایی"></div>
+              <div class="field">
+                <label>🎁 نوع آیتم *</label>
+                <select id="iType" required>
+                  <option value="">انتخاب کن...</option>
+                  <option value="بلیط طلایی">🎫 بلیط طلایی</option>
+                  <option value="منظره">🏞️ منظره</option>
+                  <option value="اسکین">🎨 اسکین</option>
+                  <option value="الماس">💎 الماس</option>
+                  <option value="سکه">🪙 سکه</option>
+                  <option value="پس زمینه">🖼️ پس زمینه</option>
+                  <option value="سایر">📦 سایر</option>
+                </select>
+              </div>
+            </div>
+            <div class="row-2">
+              <div class="field"><label>💰 قیمت (تومان) *</label><input type="number" id="iPriceToman" required placeholder="100000"></div>
+              <div class="field"><label>💵 قیمت (دلار)</label><input type="number" id="iPriceDollar" step="0.01" placeholder="2.50"></div>
+            </div>
+            <div class="row-2">
+              <div class="field"><label>🔢 کد آیتم *</label><input type="text" id="iCode" required placeholder="ITM-001"></div>
+              <div class="field">
+                <label>🔘 وضعیت</label>
+                <select id="iStatus">
+                  <option value="available">✅ موجود</option>
+                  <option value="sold">❌ فروش رفته</option>
+                </select>
+              </div>
+            </div>
+            <div class="field"><label>📝 توضیحات</label><textarea id="iDescription" placeholder="توضیحات آیتم..."></textarea></div>
+            <div class="field">
+              <label>📸 عکس‌ها (چندتایی)</label>
+              <div class="upload-box" onclick="document.getElementById('iImages').click()">
+                <span class="icon">🖼️</span>
+                <div>برای انتخاب عکس‌ها کلیک کن</div>
+                <input type="file" id="iImages" accept="image/*" multiple onchange="previewImages(this, 'iPreview')">
+              </div>
+              <div id="iPreview" class="preview-grid"></div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-gold" id="iSubmitBtn">🚀 ثبت آیتم</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="items-list-section" class="hidden">
+        <div class="card">
+          <h2 class="gold">📋 لیست آیتم‌های کلش</h2>
+          <div id="itemsList" class="accounts-list">در حال بارگذاری...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- تب ۳: فری فایر -->
+    <div id="tab-freefire" class="hidden">
+      <div class="section-tabs">
+        <button class="section-tab active" data-section="add">➕ افزودن اکانت</button>
+        <button class="section-tab" data-section="list">📋 لیست اکانت‌ها</button>
+      </div>
+
+      <div id="freefire-add-section">
+        <div class="card">
+          <h2 class="fire">➕ افزودن اکانت فری فایر جدید</h2>
+          <div class="msg" id="ffAddMsg"></div>
+          <form id="ffForm">
+            <div class="row-2">
+              <div class="field"><label>🔫 عنوان *</label><input type="text" id="ffTitle" required placeholder="اکانت فری فایر حرفه‌ای"></div>
+              <div class="field"><label>🏆 رنک</label><input type="text" id="ffRank" placeholder="Heroic / Grandmaster"></div>
+            </div>
+            <div class="row-2">
+              <div class="field"><label>📊 لول</label><input type="number" id="ffLevel" placeholder="60"></div>
+              <div class="field"><label>🔢 کد اکانت *</label><input type="text" id="ffCode" required placeholder="FF-001"></div>
+            </div>
+            <div class="row-2">
+              <div class="field"><label>💰 قیمت (تومان) *</label><input type="number" id="ffPriceToman" required placeholder="500000"></div>
+              <div class="field"><label>💵 قیمت (دلار)</label><input type="number" id="ffPriceDollar" step="0.01" placeholder="10.00"></div>
+            </div>
+            <div class="field">
+              <label>🔘 وضعیت</label>
+              <select id="ffStatus">
+                <option value="available">✅ موجود</option>
+                <option value="sold">❌ فروش رفته</option>
+              </select>
+            </div>
+            <div class="field"><label>📝 توضیحات</label><textarea id="ffDescription" placeholder="توضیحات اکانت..."></textarea></div>
+            <div class="field">
+              <label>📸 عکس‌ها (چندتایی)</label>
+              <div class="upload-box" onclick="document.getElementById('ffImages').click()">
+                <span class="icon">🖼️</span>
+                <div>برای انتخاب عکس‌ها کلیک کن</div>
+                <input type="file" id="ffImages" accept="image/*" multiple onchange="previewImages(this, 'ffPreview')">
+              </div>
+              <div id="ffPreview" class="preview-grid"></div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-fire" id="ffSubmitBtn">🚀 ثبت اکانت</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="freefire-list-section" class="hidden">
+        <div class="card">
+          <h2 class="fire">📋 لیست اکانت‌های فری فایر</h2>
+          <div id="ffList" class="accounts-list">در حال بارگذاری...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- تب ۴: همه -->
+    <div id="tab-all" class="hidden">
+      <div class="card">
+        <h2>📋 لیست همه محصولات</h2>
+        <div id="allList" class="accounts-list">در حال بارگذاری...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="editModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="editModalTitle">✏️ ویرایش</h2>
+        <button type="button" onclick="closeEditModal()" class="close-btn">✕</button>
+      </div>
+      <div class="msg" id="editMsg"></div>
+      <form id="editForm"></form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>
