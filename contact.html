@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تماس با ما | خرید اکانت کلش آف کلنز - کاپیتان شاپ</title>
+<meta name="description" content="تماس با کاپیتان شاپ برای خرید اکانت کلش آف کلنز، خرید آیتم‌های کلش و خرید اکانت فری فایر. پشتیبانی ۲۴ ساعته از طریق روبیکا و تماس.">
+<meta name="keywords" content="تماس با کاپیتان شاپ, خرید اکانت کلش آف کلنز, خرید کلش آف کلنز, خرید اکانت فری فایر, پشتیبانی کلش">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neon-blue: #00D9FF;
+    --neon-purple: #B026FF;
+    --neon-pink: #FF2E88;
+    --neon-green: #00FF88;
+    --gold: #FFB800;
+    --fire-orange: #FF6B00;
+    --dark: #0A0A15;
+    --text: #F8FAFC;
+    --muted: #94A3B8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    line-height: 1.8;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(176, 38, 255, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(0, 217, 255, 0.15) 0%, transparent 40%);
+  }
+  header {
+    background: rgba(10, 10, 21, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+    padding: 14px 24px;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  header .logo {
+    font-family: 'Bebas Neue', 'Vazirmatn', sans-serif;
+    font-size: 22px;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+  }
+  header nav { display: flex; gap: 8px; flex-wrap: wrap; }
+  header nav a {
+    color: var(--neon-blue);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    background: rgba(0, 217, 255, 0.05);
+  }
+  header nav a.active {
+    background: rgba(0, 217, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+  h1 {
+    font-family: 'Bebas Neue', 'Vazirmatn', sans-serif;
+    font-size: 42px; text-align: center;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .contact-card {
+    background: linear-gradient(135deg, rgba(18, 18, 42, 0.9), rgba(28, 28, 58, 0.9));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    border-radius: 20px;
+    padding: 26px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .contact-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-blue);
+    box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+  }
+  .contact-card .icon { font-size: 48px; margin-bottom: 12px; display: block; }
+  .contact-card h2 {
+    font-family: 'Bebas Neue', 'Vazirmatn', sans-serif;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  .contact-card.clash h2 { color: var(--neon-purple); }
+  .contact-card.items h2 { color: var(--gold); }
+  .contact-card.freefire h2 { color: var(--fire-orange); }
+  .contact-btns {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .contact-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    transition: all 0.3s;
+    min-width: 160px;
+  }
+  .btn-rubika {
+    color: #00D9FF;
+    border: 1px solid rgba(0,217,255,0.4);
+    background: rgba(0,217,255,0.08);
+  }
+  .btn-rubika:hover {
+    background: rgba(0,217,255,0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,217,255,0.3);
+  }
+  .btn-phone {
+    color: #00FF88;
+    border: 1px solid rgba(0,255,136,0.4);
+    background: rgba(0,255,136,0.08);
+  }
+  .btn-phone:hover {
+    background: rgba(0,255,136,0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,255,136,0.3);
+  }
+  .seo-text {
+    background: linear-gradient(135deg, rgba(18, 18, 42, 0.9), rgba(28, 28, 58, 0.9));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    border-radius: 20px;
+    padding: 24px;
+    margin-top: 30px;
+    text-align: center;
+  }
+  .seo-text p { color: var(--muted); font-size: 14px; line-height: 2; }
+  .seo-text strong { color: var(--gold); }
+  footer {
+    text-align: center; padding: 40px 20px;
+    border-top: 1px solid rgba(0, 217, 255, 0.15);
+    color: var(--muted); font-size: 13px; margin-top: 40px;
+  }
+  footer .brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  footer a { color: var(--neon-blue); text-decoration: none; margin: 0 8px; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">⚓ Capitan Shop</div>
+    <nav>
+      <a href="index.html">🏠 خانه</a>
+      <a href="accounts.html">🎮 اکانت‌ها</a>
+      <a href="about.html">📄 درباره ما</a>
+      <a href="contact.html" class="active">📞 تماس</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>📞 تماس با کاپیتان شاپ</h1>
+
+    <div class="contact-grid">
+      <div class="contact-card clash">
+        <span class="icon">🎮</span>
+        <h2>خرید اکانت کلش آف کلنز</h2>
+        <p style="color: var(--muted); font-size: 14px; margin-bottom: 10px;">برای خرید اکانت‌های کلش آف کلنز با ما در تماس باشید</p>
+        <div class="contact-btns">
+          <a href="https://rubika.ir/AMIR_CAPITAN_18" target="_blank" class="contact-btn btn-rubika">💬 روبیکا</a>
+          <a href="tel:+989189080173" class="contact-btn btn-phone">📞 تماس</a>
+        </div>
+      </div>
+
+      <div class="contact-card items">
+        <span class="icon">🏆</span>
+        <h2>خرید آیتم‌های کلش</h2>
+        <p style="color: var(--muted); font-size: 14px; margin-bottom: 10px;">برای خرید بلیط طلایی، منظره و سایر آیتم‌ها</p>
+        <div class="contact-btns">
+          <a href="https://rubika.ir/AD_CAPITAN_5" target="_blank" class="contact-btn btn-rubika">💬 روبیکا</a>
+          <a href="tel:+989923534178" class="contact-btn btn-phone">📞 تماس</a>
+        </div>
+      </div>
+
+      <div class="contact-card freefire">
+        <span class="icon">🔫</span>
+        <h2>خرید اکانت فری فایر</h2>
+        <p style="color: var(--muted); font-size: 14px; margin-bottom: 10px;">برای خرید اکانت‌های فری فایر با رنک‌های بالا</p>
+        <div class="contact-btns">
+          <a href="https://rubika.ir/FF_CaPiTaN_ShoP" target="_blank" class="contact-btn btn-rubika">💬 روبیکا</a>
+          <a href="tel:+989397855492" class="contact-btn btn-phone">📞 تماس</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-text">
+      <p>
+        <strong>کاپیتان شاپ</strong>، مطمئن‌ترین <strong>فروشگاه کلش آف کلنز</strong> در ایران،
+        با پشتیبانی ۲۴ ساعته آماده خدمت‌رسانی به شماست. برای <strong>خرید اکانت کلش آف کلنز</strong>،
+        <strong>خرید کلش آف کلنز</strong> با نقد و اقساط، و <strong>خرید اکانت فری فایر</strong>
+        از راه‌های ارتباطی بالا با ما در تماس باشید.
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="brand">CAPITAN SHOP</div>
+    <p style="margin-bottom:16px;">© تمامی حقوق محفوظ است - کاپیتان شاپ</p>
+    <div>
+      <a href="index.html">خانه</a>
+      <a href="accounts.html">اکانت‌ها</a>
+      <a href="about.html">درباره ما</a>
+    </div>
+  </footer>
+</body>
+</html>
