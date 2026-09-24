@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خرید آیتم‌های کلش آف کلنز | بلیط طلایی و منظره - Capitan Shop</title>
+<meta name="description" content="خرید آیتم‌های کلش آف کلنز شامل بلیط طلایی، منظره، اسکین و... با بهترین قیمت و ضمانت از کاپیتان شاپ.">
+<meta name="keywords" content="خرید آیتم کلش, بلیط طلایی, منظره کلش, آیتم کلش آف کلنز, خرید بلیط طلایی">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neon-blue: #00D9FF;
+    --neon-purple: #B026FF;
+    --neon-pink: #FF2E88;
+    --neon-green: #00FF88;
+    --gold: #FFB800;
+    --dark: #0A0A15;
+    --dark-2: #12122A;
+    --text: #F8FAFC;
+    --muted: #94A3B8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+    position: relative;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(255, 184, 0, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(255, 46, 136, 0.15) 0%, transparent 40%);
+    z-index: -2;
+  }
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 184, 0, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 184, 0, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    mask-image: radial-gradient(circle at 50% 50%, black 20%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, black 20%, transparent 80%);
+  }
+  header {
+    background: rgba(10, 10, 21, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 184, 0, 0.2);
+    padding: 14px 24px;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  header .logo {
+    font-family: 'Bebas Neue', 'Vazirmatn', sans-serif;
+    font-size: 22px;
+    background: linear-gradient(135deg, var(--gold), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+  }
+  header nav { display: flex; gap: 8px; flex-wrap: wrap; }
+  header nav a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 184, 0, 0.3);
+    background: rgba(255, 184, 0, 0.05);
+  }
+  header nav a.active {
+    background: rgba(255, 184, 0, 0.2);
+    box-shadow: 0 0 20px rgba(255, 184, 0, 0.4);
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+  h1 {
+    font-family: 'Bebas Neue', 'Vazirmatn', sans-serif;
+    font-size: 36px; text-align: center;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, var(--gold), var(--neon-pink), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .filters-panel {
+    background: linear-gradient(135deg, rgba(18, 18, 42, 0.9), rgba(28, 28, 58, 0.9));
+    border: 1px solid rgba(255, 184, 0, 0.2);
+    border-radius: 20px; padding: 20px; margin-bottom: 24px;
+  }
+  .filters-header {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 16px;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .filters-title {
+    font-family: 'Bebas Neue', 'Vazirmatn', sans-serif;
+    font-size: 18px; color: var(--gold);
+  }
+  .results-count {
+    background: rgba(255, 184, 0, 0.1);
+    color: var(--gold); padding: 4px 12px;
+    border-radius: 999px; font-size: 12px;
+    font-weight: 700; border: 1px solid rgba(255, 184, 0, 0.3);
+  }
+  .filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .filter-field { display: flex; flex-direction: column; gap: 6px; }
+  .filter-field label { font-size: 12px; color: var(--gold); font-weight: 700; }
+  .filter-field input, .filter-field select {
+    padding: 10px 14px;
+    background: rgba(10, 10, 21, 0.6);
+    border: 1px solid rgba(255, 184, 0, 0.25);
+    border-radius: 10px; color: var(--text);
+    font-family: inherit; font-size: 13px;
+  }
+  .filter-field input:focus, .filter-field select:focus {
+    outline: none; border-color: var(--gold);
+  }
+  .filter-field select option { background: var(--dark-2); }
+  .filter-actions { margin-top: 16px; }
+  .filter-btn-reset {
+    padding: 10px 18px; border-radius: 10px;
+    background: rgba(255, 46, 136, 0.1);
+    color: var(--neon-pink);
+    border: 1px solid rgba(255, 46, 136, 0.3);
+    font-family: inherit; font-weight: 800;
+    font-size: 13px; cursor: pointer;
+  }
+
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .item-card {
+    background: linear-gradient(135deg, rgba(18, 18, 42, 0.9), rgba(28, 28, 58, 0.9));
+    border: 1px solid rgba(255, 184, 0, 0.2);
+    border-radius: 20px; overflow: hidden;
+    transition: all 0.4s; display: flex;
+    flex-direction: column; position: relative;
+  }
+  .item-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(255, 184, 0, 0.3);
+    border-color: var(--gold);
+  }
+  .slider {
+    position: relative; width: 100%; height: 220px;
+    background: linear-gradient(135deg, #12122A, #1C1C3A);
+    overflow: hidden;
+  }
+  .slider-track {
+    display: flex; width: 100%; height: 100%;
+    transition: transform 0.5s;
+  }
+  .slider-slide {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    position: relative; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 64px;
+    background: linear-gradient(135deg, #12122A, #1C1C3A);
+    cursor: pointer;
+  }
+  .slider-slide img {
+    width: 100%; height: 100%; object-fit: cover;
+    pointer-events: none;
+  }
+  .slider-slide::before {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(to top, rgba(10, 10, 21, 0.7), transparent);
+    pointer-events: none; z-index: 1;
+  }
+  .slider-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(10, 10, 21, 0.7);
+    border: 1px solid rgba(255, 184, 0, 0.4);
+    color: #fff; font-size: 18px; font-weight: 900;
+    cursor: pointer; display: flex;
+    align-items: center; justify-content: center;
+    z-index: 3; opacity: 0;
+  }
+  .item-card:hover .slider-btn { opacity: 1; }
+  .slider-btn-prev { right: 8px; }
+  .slider-btn-next { left: 8px; }
+  .slider-dots {
+    position: absolute; bottom: 10px; left: 50%;
+    transform: translateX(-50%); display: flex;
+    gap: 6px; z-index: 3; padding: 4px 10px;
+    background: rgba(10, 10, 21, 0.6);
+    border-radius: 999px;
+  }
+  .slider-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer; border: none;
+  }
+  .slider-dot.active {
+    background: var(--gold); width: 20px;
+    border-radius: 4px;
+  }
+  .slider-counter {
+    position: absolute; top: 10px; left: 10px;
+    background: rgba(10, 10, 21, 0.7);
+    color: #fff; padding: 3px 9px;
+    border-radius: 999px; font-size: 10px;
+    font-weight: 700; z-index: 3;
+  }
+  .item-card .type-badge {
+    position: absolute; top: 10px; right: 10px;
+    padding: 4px 10px; border-radius: 999px;
+    font-size: 10px; font-weight: 800; z-index: 4;
+    background: rgba(255, 184, 0, 0.9); color: #000;
+  }
+  .item-card .status-badge {
+    position: absolute; top: 10px; left: 10px;
+    padding: 4px 10px; border-radius: 999px;
+    font-size: 10px; font-weight: 800; z-index: 4;
+  }
+  .status-available { background: rgba(0, 255, 136, 0.9); color: #000; }
+  .status-sold { background: rgba(255, 46, 136, 0.9); color: #fff; }
+  .item-card .body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+  .item-card h3 { font-size: 15px; margin-bottom: 6px; color: #fff; }
+  .item-card .desc {
+    font-size: 12px; color: var(--muted);
+    margin-bottom: 12px; line-height: 1.7;
+    max-height: 60px; overflow: hidden;
+  }
+  .price-row { display: flex; gap: 8px; margin-bottom: 12px; }
+  .price-box {
+    flex: 1; background: rgba(255, 184, 0, 0.08);
+    border: 1px solid rgba(255, 184, 0, 0.2);
+    border-radius: 10px; padding: 8px 10px; text-align: center;
+  }
+  .price-box .lbl { font-size: 10px; color: var(--muted); margin-bottom: 2px; }
+  .price-box .val {
+    font-family: 'Bebas Neue', 'Vazirmatn', sans-serif;
+    font-size: 16px; color: var(--gold); font-weight: 900;
+  }
+  .item-card .meta {
+    font-size: 11px; color: var(--muted);
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .item-card .meta span {
+    background: rgba(0, 217, 255, 0.08);
+    padding: 3px 8px; border-radius: 6px;
+    color: var(--neon-blue);
+    border: 1px solid rgba(0, 217, 255, 0.15);
+  }
+  .item-card .contact {
+    display: block; text-align: center;
+    background: linear-gradient(135deg, var(--gold), #E5A500);
+    color: #000; padding: 10px; border-radius: 12px;
+    text-decoration: none; font-weight: 800; font-size: 13px;
+    transition: all 0.3s;
+  }
+  .item-card .contact:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(255, 184, 0, 0.7); }
+  .item-card.sold { opacity: 0.55; }
+  .buy-label {
+    font-size: 11px; color: var(--muted);
+    margin-bottom: 8px; margin-top: auto; text-align: center;
+  }
+
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(5, 5, 15, 0.95);
+    z-index: 9999; display: none;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox-img {
+    max-width: 95vw; max-height: 85vh;
+    object-fit: contain; border-radius: 16px;
+  }
+  .lightbox-close {
+    position: absolute; top: 20px; left: 20px;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(255, 46, 136, 0.15);
+    border: 1px solid rgba(255, 46, 136, 0.5);
+    color: #FF2E88; font-size: 24px;
+    font-weight: 900; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10001;
+  }
+  .lightbox-prev, .lightbox-next {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(10, 10, 21, 0.7);
+    border: 1px solid rgba(255, 184, 0, 0.5);
+    color: #fff; font-size: 28px; font-weight: 900;
+    cursor: pointer; display: flex;
+    align-items: center; justify-content: center;
+    z-index: 10001;
+  }
+  .lightbox-prev { right: 20px; }
+  .lightbox-next { left: 20px; }
+  .lightbox-counter {
+    position: absolute; bottom: 20px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 10, 21, 0.8);
+    color: #fff; padding: 8px 20px;
+    border-radius: 999px; font-size: 14px; font-weight: 700;
+  }
+
+  .skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px; grid-column: 1 / -1;
+  }
+  .skeleton-card {
+    background: rgba(18, 18, 42, 0.9);
+    border: 1px solid rgba(255, 184, 0, 0.1);
+    border-radius: 20px; overflow: hidden;
+  }
+  .skeleton-img {
+    height: 220px;
+    background: linear-gradient(90deg, #1C1C3A, #2A2A4A, #1C1C3A);
+    background-size: 200% 100%; animation: shimmer 1.5s infinite;
+  }
+  .skeleton-body { padding: 16px; }
+  .skeleton-line {
+    height: 14px;
+    background: linear-gradient(90deg, #1C1C3A, #2A2A4A, #1C1C3A);
+    background-size: 200% 100%; animation: shimmer 1.5s infinite;
+    border-radius: 6px; margin-bottom: 10px;
+  }
+  .skeleton-line.short { width: 60%; }
+  .skeleton-line.medium { width: 80%; }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  .loading, .empty {
+    text-align: center; color: var(--muted);
+    padding: 80px 20px; grid-column: 1 / -1;
+  }
+  .empty .emoji { font-size: 64px; display: block; margin-bottom: 14px; }
+
+  footer {
+    text-align: center; padding: 40px 20px;
+    border-top: 1px solid rgba(255, 184, 0, 0.15);
+    color: var(--muted); font-size: 13px; margin-top: 40px;
+  }
+  footer .brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    background: linear-gradient(135deg, var(--gold), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  footer .contact-btn {
+    display: inline-block; text-decoration: none;
+    padding: 10px 18px; border-radius: 12px;
+    font-size: 13px; font-weight: 800; margin: 5px 3px;
+  }
+  footer .btn-rubika {
+    color: #FFB800; border: 1px solid rgba(255,184,0,0.4);
+    background: rgba(255,184,0,0.08);
+  }
+  footer .btn-phone {
+    color: #FF2E88; border: 1px solid rgba(255,46,136,0.4);
+    background: rgba(255,46,136,0.08);
+  }
+  @media (max-width: 640px) {
+    .container { padding: 24px 16px; }
+    h1 { font-size: 26px; }
+    .slider { height: 180px; }
+    .slider-btn { opacity: 1; }
+    .filter-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">⚓ Capitan Shop</div>
+    <nav>
+      <a href="index.html">🏠 خانه</a>
+      <a href="accounts.html">🎮 اکانت‌ها</a>
+      <a href="clash-items.html" class="active">🏆 آیتم‌ها</a>
+      <a href="freefire.html">🔫 فری فایر</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>🏆 آیتم‌های کلش آف کلنز</h1>
+
+    <div class="filters-panel">
+      <div class="filters-header">
+        <div class="filters-title">🔍 فیلتر پیشرفته</div>
+        <div class="results-count" id="resultsCount">در حال بارگذاری...</div>
+      </div>
+
+      <div class="filter-grid">
+        <div class="filter-field">
+          <label>🔎 جستجو</label>
+          <input type="text" id="searchInput" placeholder="عنوان یا کد آیتم...">
+        </div>
+        <div class="filter-field">
+          <label>🎁 نوع آیتم</label>
+          <select id="typeFilter">
+            <option value="all">همه انواع</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>🔘 وضعیت</label>
+          <select id="statusFilter">
+            <option value="all">همه وضعیت‌ها</option>
+            <option value="available">✅ موجود</option>
+            <option value="sold">❌ فروش رفته</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>💰 از قیمت (تومان)</label>
+          <input type="number" id="minPrice" placeholder="مثلاً 100000">
+        </div>
+        <div class="filter-field">
+          <label>💰 تا قیمت (تومان)</label>
+          <input type="number" id="maxPrice" placeholder="مثلاً 1000000">
+        </div>
+        <div class="filter-field">
+          <label>📊 مرتب‌سازی</label>
+          <select id="sortFilter">
+            <option value="newest">جدیدترین</option>
+            <option value="cheapest">ارزان‌ترین</option>
+            <option value="expensive">گران‌ترین</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-actions">
+        <button class="filter-btn-reset" onclick="resetFilters()">🔄 پاک کردن فیلترها</button>
+      </div>
+    </div>
+
+    <div id="itemsGrid" class="items-grid">
+      <div class="skeleton-grid">
+        <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div><div class="skeleton-line medium"></div></div></div>
+        <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div><div class="skeleton-line medium"></div></div></div>
+        <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div><div class="skeleton-line medium"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="brand">CAPITAN SHOP</div>
+    <p style="margin-bottom:16px;">© تمامی حقوق محفوظ است</p>
+    <div style="font-size:12px; color:#94A3B8; margin-bottom:8px;">👨‍💼 ارتباط با مدیریت (بخش آیتم‌ها):</div>
+    <div>
+      <a href="https://rubika.ir/AD_CAPITAN_5" target="_blank" class="contact-btn btn-rubika">🛒 @AD_CAPITAN_5</a>
+      <a href="tel:+989923534178" class="contact-btn btn-phone">📞 09923534178</a>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-prev" onclick="changeLightboxSlide(1)">‹</button>
+    <button class="lightbox-next" onclick="changeLightboxSlide(-1)">›</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="عکس">
+    <div class="lightbox-counter" id="lightboxCounter">۱ / ۱</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script>
+    let allItems = [];
+    let lightboxImages = [];
+    let lightboxIndex = 0;
+
+    function populateTypeFilter() {
+      const types = [...new Set(allItems.map(i => i.item_type).filter(Boolean))];
+      const select = document.getElementById('typeFilter');
+      select.innerHTML = '<option value="all">همه انواع</option>';
+      types.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = `🎁 ${t}`;
+        select.appendChild(opt);
+      });
+    }
+
+    async function loadAll() {
+      const grid = document.getElementById('itemsGrid');
+      try {
+        allItems = await getClashItems();
+        populateTypeFilter();
+        render();
+      } catch (err) {
+        grid.innerHTML = '<div class="loading" style="color:#FF2E88;">خطا: ' + err.message + '</div>';
+      }
+    }
+
+    function openLightbox(imagesJson, startIndex) {
+      try {
+        const images = JSON.parse(decodeURIComponent(imagesJson));
+        if (!images || images.length === 0) return;
+        lightboxImages = images;
+        lightboxIndex = startIndex || 0;
+        document.getElementById('lightboxImg').src = images[lightboxIndex];
+        document.getElementById('lightbox').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        updateLightboxUI();
+      } catch (e) { console.warn(e); }
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+      lightboxImages = [];
+    }
+
+    function changeLightboxSlide(direction) {
+      if (lightboxImages.length === 0) return;
+      lightboxIndex = (lightboxIndex + direction + lightboxImages.length) % lightboxImages.length;
+      updateLightboxUI();
+    }
+
+    function updateLightboxUI() {
+      document.getElementById('lightboxImg').src = lightboxImages[lightboxIndex];
+      document.getElementById('lightboxCounter').textContent =
+        `${(lightboxIndex + 1).toLocaleString('fa-IR')} / ${lightboxImages.length.toLocaleString('fa-IR')}`;
+    }
+
+    function buildSlider(images, cardId) {
+      if (!images || images.length === 0) {
+        return `<div class="slider"><div class="slider-slide">🏆</div></div>`;
+      }
+      const encodedImages = encodeURIComponent(JSON.stringify(images));
+      const slidesHtml = images.map((url, i) =>
+        `<div class="slider-slide" onclick="event.stopPropagation(); openLightbox('${encodedImages}', ${i})">
+          <img src="${url}" alt="عکس" loading="lazy">
+        </div>`
+      ).join('');
+      const dotsHtml = images.length > 1
+        ? `<div class="slider-dots">${images.map((_, i) =>
+            `<button class="slider-dot ${i === 0 ? 'active' : ''}" onclick="goToSlide('${cardId}', ${i}, event)"></button>`
+          ).join('')}</div>`
+        : '';
+      const navHtml = images.length > 1
+        ? `<button class="slider-btn slider-btn-prev" onclick="changeSlide('${cardId}', -1, event)">‹</button>
+           <button class="slider-btn slider-btn-next" onclick="changeSlide('${cardId}', 1, event)">›</button>
+           <div class="slider-counter"><span class="current">۱</span> / ${images.length.toLocaleString('fa-IR')}</div>`
+        : '';
+      return `
+        <div class="slider" id="slider-${cardId}" data-index="0" data-total="${images.length}">
+          <div class="slider-track">${slidesHtml}</div>
+          ${navHtml}
+          ${dotsHtml}
+        </div>
+      `;
+    }
+
+    function changeSlide(cardId, direction, event) {
+      if (event) event.stopPropagation();
+      const slider = document.getElementById('slider-' + cardId);
+      if (!slider) return;
+      const total = parseInt(slider.dataset.total);
+      let index = parseInt(slider.dataset.index);
+      index = (index + direction + total) % total;
+      updateSlider(slider, index);
+    }
+
+    function goToSlide(cardId, index, event) {
+      if (event) event.stopPropagation();
+      const slider = document.getElementById('slider-' + cardId);
+      if (!slider) return;
+      updateSlider(slider, index);
+    }
+
+    function updateSlider(slider, index) {
+      slider.dataset.index = index;
+      slider.querySelector('.slider-track').style.transform = `translateX(${index * 100}%)`;
+      slider.querySelectorAll('.slider-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      const counter = slider.querySelector('.slider-counter .current');
+      if (counter) counter.textContent = (index + 1).toLocaleString('fa-IR');
+    }
+
+    function render() {
+      const grid = document.getElementById('itemsGrid');
+      const search = document.getElementById('searchInput').value.trim().toLowerCase();
+      const type = document.getElementById('typeFilter').value;
+      const status = document.getElementById('statusFilter').value;
+      const minPrice = parseInt(document.getElementById('minPrice').value) || 0;
+      const maxPrice = parseInt(document.getElementById('maxPrice').value) || Infinity;
+      const sort = document.getElementById('sortFilter').value;
+
+      let filtered = [...allItems];
+      if (type !== 'all') filtered = filtered.filter(i => i.item_type === type);
+      if (status !== 'all') filtered = filtered.filter(i => i.status === status);
+      if (minPrice > 0) filtered = filtered.filter(i => i.price_toman >= minPrice);
+      if (maxPrice < Infinity) filtered = filtered.filter(i => i.price_toman <= maxPrice);
+      if (search) {
+        filtered = filtered.filter(i =>
+          (i.title || '').toLowerCase().includes(search) ||
+          (i.code || '').toLowerCase().includes(search)
+        );
+      }
+
+      if (sort === 'cheapest') filtered.sort((a, b) => a.price_toman - b.price_toman);
+      else if (sort === 'expensive') filtered.sort((a, b) => b.price_toman - a.price_toman);
+      else filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+      document.getElementById('resultsCount').textContent = `${filtered.length.toLocaleString('fa-IR')} آیتم پیدا شد`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="empty"><span class="emoji">🔍</span><p>آیتمی پیدا نشد</p></div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => {
+        let images = [];
+        if (item.image_urls && Array.isArray(item.image_urls) && item.image_urls.length > 0) {
+          images = item.image_urls;
+        } else if (item.image_url) {
+          images = [item.image_url];
+        }
+        const cardId = item.id;
+
+        return `
+          <div class="item-card ${item.status === 'sold' ? 'sold' : ''}">
+            <div style="position: relative;">
+              ${buildSlider(images, cardId)}
+              ${item.item_type ? `<span class="type-badge">${item.item_type}</span>` : ''}
+              <span class="status-badge ${item.status === 'available' ? 'status-available' : 'status-sold'}">
+                ${item.status === 'available' ? '✅' : '❌'}
+              </span>
+            </div>
+            <div class="body">
+              <h3>${item.title}</h3>
+              ${item.description ? `<div class="desc">${item.description}</div>` : ''}
+              <div class="price-row">
+                <div class="price-box">
+                  <div class="lbl">💰 تومان</div>
+                  <div class="val">${item.price_toman.toLocaleString('fa-IR')}</div>
+                </div>
+                ${item.price_dollar ? `
+                  <div class="price-box" style="border-color: rgba(0, 255, 136, 0.2); background: rgba(0, 255, 136, 0.08);">
+                    <div class="lbl">💵 دلار</div>
+                    <div class="val" style="color: var(--neon-green);">$${parseFloat(item.price_dollar).toFixed(2)}</div>
+                  </div>
+                ` : ''}
+              </div>
+              <div class="meta">
+                <span>🔢 کد ${item.code}</span>
+              </div>
+              ${item.status === 'available' ? `
+                <div class="buy-label">🛒 برای خرید با مدیریت تماس بگیر:</div>
+                <div style="display:flex; gap:8px;">
+                  <a href="https://rubika.ir/AD_CAPITAN_5" target="_blank" class="contact" style="flex:1; font-size:12px; padding:10px;">👨‍💼 خرید در روبیکا</a>
+                  <a href="tel:+989923534178" class="contact" style="flex:1; font-size:12px; padding:10px; background:linear-gradient(135deg, var(--neon-blue), #0090B8); color: #fff;">📞 تماس</a>
+                </div>
+              ` : `
+                <div class="contact" style="background:rgba(255,46,136,0.15);color:#FF2E88;border:1px solid rgba(255,46,136,0.3);box-shadow:none;cursor:not-allowed;margin-top:auto;">❌ فروش رفته</div>
+              `}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('typeFilter').value = 'all';
+      document.getElementById('statusFilter').value = 'all';
+      document.getElementById('minPrice').value = '';
+      document.getElementById('maxPrice').value = '';
+      document.getElementById('sortFilter').value = 'newest';
+      render();
+    }
+
+    document.getElementById('searchInput').addEventListener('input', render);
+    document.getElementById('typeFilter').addEventListener('change', render);
+    document.getElementById('statusFilter').addEventListener('change', render);
+    document.getElementById('minPrice').addEventListener('input', render);
+    document.getElementById('maxPrice').addEventListener('input', render);
+    document.getElementById('sortFilter').addEventListener('change', render);
+
+    loadAll();
+  </script>
+</body>
+</html>
